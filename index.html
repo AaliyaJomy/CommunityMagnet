@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Magnet | Local Discovery Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-magnet" style="color: #FF5A1F; transform: rotate(-45deg); margin-right: 5px;"></i>
+                Community<span style="font-weight: 300; color: #6D3D3D;">Magnet</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Discover</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Deals</a></li>
+                <li><a href="#">Submit a Spot</a></li>
+                <li><a href="#" class="login-btn">Log in</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="carousel-section">
+        <div class="carousel-item active">
+            <img src="https://via.placeholder.com/1600x400/9B2E2E/FFFFFF?text=Support+Local" alt="Support Local">
+            <div class="carousel-caption">
+                <h1>Support Your Community, One Visit at a Time</h1>
+                <p>Discover independent businesses, cafes, and hidden gems near you.</p>
+            </div>
+        </div>
+        </header>
+
+    <section class="map-section">
+        <div class="map-container">
+            <div class="search-bar-inline">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search for local businesses, cafes, or services near you...">
+                <button class="btn-search">Find Now</button>
+            </div>
+            <div id="api-map" class="api-map-placeholder">
+                <img src="https://via.placeholder.com/1600x300/F0F0F0/6D3D3D?text=API+Integrated+Map+Visualization" alt="Map View">
+            </div>
+        </div>
+    </section>
+
+    <main class="discovery-layout">
+        <div class="main-container">
+
+            <aside class="sidebar-filters">
+                <div class="filter-group">
+                    <h3>Categories <span class="clear-btn">Clear</span></h3>
+                    <ul>
+                        <li><input type="checkbox" id="cat-food"> <label for="cat-food">Food & Drink (120)</label></li>
+                        <li><input type="checkbox" id="cat-retail"> <label for="cat-retail">Boutiques & Retail (95)</label></li>
+                        <li><input type="checkbox" id="cat-services"> <label for="cat-services">Services (50)</label></li>
+                        <li><input type="checkbox" id="cat-verified"> <label for="cat-verified">Verified Community Spots</label></li>
+                    </ul>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Rating</h3>
+                    <div class="rating-stars-filter">
+                        <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i>
+                    </div>
+                </div>
+
+                <div class="filter-group price-group">
+                    <h3>Price</h3>
+                    <input type="range" min="1" max="5" value="3">
+                    <div class="price-labels"><span>$</span><span>$$$$$</span></div>
+                </div>
+            </aside>
+
+            <section class="content-results">
+                <div class="sorting-row">
+                    <label>Sort by:</label>
+                    <select class="sort-select">
+                        <option>Community Recommendations</option>
+                        <option>Highest Rated</option>
+                        <option>Nearest to Me</option>
+                    </select>
+                </div>
+
+                <div class="business-grid" id="business-grid">
+                    </div>
+                
+                <div class="pagination-row">
+                    <span class="page-arrow"><i class="fas fa-chevron-left"></i></span>
+                    <span class="page-num active">1</span>
+                    <span class="page-num">2</span>
+                    <span class="page-num">3</span>
+                    <span class="page-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
