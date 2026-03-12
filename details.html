@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Community Magnet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="login.js"></script> 
+    <script src="data.js"></script>
+    <script src="auth-status.js" defer></script>
+</head>
+
+<body class="detail-page">
+         <nav class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="window.location.href='index.html'">
+            <i class="fas fa-magnet" style="color: #FF5A1F; transform: rotate(-45deg); margin-right: 5px;"></i>
+            Community<span style="font-weight: 300; color: #6D3D3D;">Magnet</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Discover</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Categories <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i></a>
+                <div class="dropdown-content">
+                    <div class="dropdown-grid">
+                        <div class="dropdown-column">
+                            <h4>Restaurants</h4>
+                            <a href="#">Cafes & Bakeries</a>
+                            <a href="#">Fine Dining</a>
+                            <a href="#">Fast Food</a>
+                            <a href="#">Street Food</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Retail</h4>
+                            <a href="#">Thrift & Vintage</a>
+                            <a href="#">Boutiques</a>
+                            <a href="#">Home Decor</a>
+                            <a href="#">Bookstores</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Services</h4>
+                            <a href="#">Auto Repair</a>
+                            <a href="#">Hair & Beauty</a>
+                            <a href="#">Pet Care</a>
+                            <a href="#">Health & Fitness</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="submit.html">Submit a Spot</a></li>
+            <li><a href="login.html" id="auth-nav-link" class="login-btn">Log in</a></li>
+        </ul>
+    </div>
+</nav>
+    <header id="hero-bg" class="detail-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span id="biz-verified-banner" class="verified-badge">
+                <i class="fas fa-check-circle"></i> Verified Business
+            </span>
+            <h1 id="biz-name" style="font-size: 3rem; margin: 10px 0;">Loading...</h1>
+            <p id="biz-cat" class="category-pill"></p>
+        </div>
+    </header>
+
+    <main class="detail-container">
+        <div class="detail-grid">
+            <div class="detail-main">
+                <section class="info-card">
+                    <h3 class="section-title"><i class="fas fa-info-circle"></i> About this Business</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label><i class="fas fa-map-marker-alt"></i> Address</label>
+                            <p id="biz-address"></p>
+                        </div>
+                        <div class="info-item">
+                            <label><i class="fas fa-phone"></i> Phone</label>
+                            <p id="biz-phone"></p>
+                        </div>
+                        <div class="info-item">
+                            <label><i class="fas fa-clock"></i> Hours</label>
+                            <p id="biz-hours"></p>
+                        </div>
+                        <div class="info-item">
+                            <label><i class="fas fa-tags"></i> Price Range</label>
+                            <p id="biz-price" style="color: var(--primary); font-weight: bold;"></p>
+                        </div>
+                        <div class="info-item">
+                            <label><i class="fas fa-concierge-bell"></i> Service</label>
+                            <p id="biz-service-type"></p>
+                        </div>
+                    </div>
+                    <a id="biz-link" href="#" class="btn-website">Visit Official Website</a>
+                </section>
+
+                <section class="review-card">
+                    <h3 class="section-title"><i class="fas fa-star"></i> Community Reviews</h3>
+                    <div class="add-review-box">
+                        <p style="margin-bottom: 10px; font-weight: 600;">Rate your experience:</p>
+                        <div class="star-rating-input">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                        </div>
+                        <textarea id="review-text" placeholder="Tell the community what you loved (or didn't)..."></textarea>
+                        <button class="btn-primary-large" onclick="submitReview()">Post Review</button>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="detail-sidebar">
+                <div class="action-card">
+                    <h4 style="color: var(--highlight); margin-bottom: 15px;">Actions</h4>
+                    <button class="side-btn"><i class="fas fa-directions"></i> Get Directions</button>
+                    <button class="side-btn"><i class="fas fa-share-alt"></i> Share Business</button>
+                    <button class="side-btn bookmark"><i class="far fa-bookmark"></i> Save to Favorites</button>
+                </div>
+            </aside>
+        </div>
+    </main>
+</body>
+<script src="detail.js"></script>
+</html>

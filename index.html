@@ -7,24 +7,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="data.js"></script>
+    <script src="auth.js"></script>
+    <script src="auth-status.js" defer></script>
+    <script type="module" src="auth.js"></script>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-magnet" style="color: #FF5A1F; transform: rotate(-45deg); margin-right: 5px;"></i>
-                Community<span style="font-weight: 300; color: #6D3D3D;">Magnet</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#" class="active">Discover</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Deals</a></li>
-                <li><a href="#">Submit a Spot</a></li>
-                <li><a href="#" class="login-btn">Log in</a></li>
-            </ul>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="window.location.href='index.html'">
+            <i class="fas fa-magnet" style="color: #FF5A1F; transform: rotate(-45deg); margin-right: 5px;"></i>
+            Community<span style="font-weight: 300; color: #6D3D3D;">Magnet</span>
         </div>
-    </nav>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Discover</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Categories <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i></a>
+                <div class="dropdown-content">
+                    <div class="dropdown-grid">
+                        <div class="dropdown-column">
+                            <h4>Restaurants</h4>
+                            <a href="#">Cafes & Bakeries</a>
+                            <a href="#">Fine Dining</a>
+                            <a href="#">Fast Food</a>
+                            <a href="#">Street Food</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Retail</h4>
+                            <a href="#">Thrift & Vintage</a>
+                            <a href="#">Boutiques</a>
+                            <a href="#">Home Decor</a>
+                            <a href="#">Bookstores</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Services</h4>
+                            <a href="#">Auto Repair</a>
+                            <a href="#">Hair & Beauty</a>
+                            <a href="#">Pet Care</a>
+                            <a href="#">Health & Fitness</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="submit.html">Submit a Spot</a></li>
+            <li><a href="login.html" id="auth-nav-link" class="login-btn">Log in</a></li>
+        </ul>
+    </div>
+</nav>
 
     <header class="carousel-section">
         <div class="carousel-item active">
@@ -53,29 +86,80 @@
         <div class="main-container">
 
             <aside class="sidebar-filters">
-                <div class="filter-group">
-                    <h3>Categories <span class="clear-btn">Clear</span></h3>
-                    <ul>
-                        <li><input type="checkbox" id="cat-food"> <label for="cat-food">Food & Drink (120)</label></li>
-                        <li><input type="checkbox" id="cat-retail"> <label for="cat-retail">Boutiques & Retail (95)</label></li>
-                        <li><input type="checkbox" id="cat-services"> <label for="cat-services">Services (50)</label></li>
-                        <li><input type="checkbox" id="cat-verified"> <label for="cat-verified">Verified Community Spots</label></li>
-                    </ul>
-                </div>
+    <div class="filter-group">
+        <h3>Categories <span class="clear-btn">Clear</span></h3>
+        <div class="scroll-filter-box">
+            <h4>Restaurants</h4>
+            <ul>
+                <li><input type="checkbox" id="sub-cafes"> <label for="sub-cafes">Cafes & Bakeries</label></li>
+                <li><input type="checkbox" id="sub-fine"> <label for="sub-fine">Fine Dining</label></li>
+                <li><input type="checkbox" id="sub-fast"> <label for="sub-fast">Fast Food</label></li>
+            </ul>
+            <h4>Retail</h4>
+            <ul>
+                <li><input type="checkbox" id="sub-thrift"> <label for="sub-thrift">Thrift & Vintage</label></li>
+                <li><input type="checkbox" id="sub-boutique"> <label for="sub-boutique">Boutiques</label></li>
+                <li><input type="checkbox" id="sub-books"> <label for="sub-books">Bookstores</label></li>
+            </ul>
+            <h4>Services</h4>
+            <ul>
+                <li><input type="checkbox" id="sub-auto"> <label for="sub-auto">Auto Repair</label></li>
+                <li><input type="checkbox" id="sub-hair"> <label for="sub-hair">Hair & Beauty</label></li>
+                <li><input type="checkbox" id="sub-health"> <label for="sub-health">Health & Fitness</label></li>
+            </ul>
+        </div>
+    </div>
 
-                <div class="filter-group">
-                    <h3>Rating</h3>
-                    <div class="rating-stars-filter">
-                        <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i> <i class="fas fa-star active"></i>
-                    </div>
-                </div>
+    <div class="filter-group">
+        <h3>Specials</h3>
+        <ul>
+            <li><input type="checkbox" id="feat-verified"> <label for="feat-verified" class="verified-label"><i class="fas fa-certificate"></i> Favourites</label></li>
+            <li><input type="checkbox" id="feat-deals"> <label for="feat-deals">Active Coupons</label></li>
+            <li><input type="checkbox" id="feat-new"> <label for="feat-new">Recently Added</label></li>
+        </ul>
+    </div>
 
-                <div class="filter-group price-group">
-                    <h3>Price</h3>
-                    <input type="range" min="1" max="5" value="3">
-                    <div class="price-labels"><span>$</span><span>$$$$$</span></div>
-                </div>
-            </aside>
+    <div class="filter-group">
+        <h3>Vibe</h3>
+        <div class="vibe-pills">
+            <span class="vibe-pill">Cozy</span>
+            <span class="vibe-pill">Modern</span>
+            <span class="vibe-pill">Lively</span>
+            <span class="vibe-pill">Quiet</span>
+        </div>
+    </div>
+
+    <div class="filter-group">
+        <h3>Minimum Rating</h3>
+        <div class="rating-stars-filter">
+            <i class="fas fa-star active" data-value="1"></i>
+            <i class="fas fa-star active" data-value="2"></i>
+            <i class="fas fa-star active" data-value="3"></i>
+            <i class="fas fa-star active" data-value="4"></i>
+            <i class="fas fa-star" data-value="5"></i>
+            <span>& Up</span>
+        </div>
+    </div>
+
+    <div class="filter-group">
+        <h3>Price Range</h3>
+        <div class="price-toggle-group">
+            <button class="price-btn">$</button>
+            <button class="price-btn">$$</button>
+            <button class="price-btn">$$$</button>
+            <button class="price-btn">$$$$</button>
+        </div>
+    </div>
+
+    <div class="filter-group">
+        <h3>Features</h3>
+        <ul>
+            <li><input type="checkbox" id="acc-wheel"> <label for="acc-wheel"><i class="fas fa-wheelchair"></i> Accessible</label></li>
+            <li><input type="checkbox" id="acc-pet"> <label for="acc-pet"><i class="fas fa-dog"></i> Pet Friendly</label></li>
+            <li><input type="checkbox" id="acc-wifi"> <label for="acc-wifi"><i class="fas fa-wifi"></i> Free Wi-Fi</label></li>
+        </ul>
+    </div>
+</aside>
 
             <section class="content-results">
                 <div class="sorting-row">

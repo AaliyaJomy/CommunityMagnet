@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Deals | Community Magnet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="data.js"></script>
+    <script src="auth.js"></script>
+    <script src="auth-status.js" defer></script>
+    <script type="module" src="auth.js"></script>
+</head>
+<body class="deals-body">
+
+       <nav class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="window.location.href='index.html'">
+            <i class="fas fa-magnet" style="color: #FF5A1F; transform: rotate(-45deg); margin-right: 5px;"></i>
+            Community<span style="font-weight: 300; color: #6D3D3D;">Magnet</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Discover</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Categories <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i></a>
+                <div class="dropdown-content">
+                    <div class="dropdown-grid">
+                        <div class="dropdown-column">
+                            <h4>Restaurants</h4>
+                            <a href="#">Cafes & Bakeries</a>
+                            <a href="#">Fine Dining</a>
+                            <a href="#">Fast Food</a>
+                            <a href="#">Street Food</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Retail</h4>
+                            <a href="#">Thrift & Vintage</a>
+                            <a href="#">Boutiques</a>
+                            <a href="#">Home Decor</a>
+                            <a href="#">Bookstores</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Services</h4>
+                            <a href="#">Auto Repair</a>
+                            <a href="#">Hair & Beauty</a>
+                            <a href="#">Pet Care</a>
+                            <a href="#">Health & Fitness</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="submit.html">Submit a Spot</a></li>
+            <li><a href="login.html" id="auth-nav-link" class="login-btn">Log in</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="deals-hero">
+    <div class="hero-content">
+        <h1>Local Gems, Better Prices</h1>
+        <p>Exclusive discounts from your favorite independent businesses.</p>
+    </div>
+</header>
+
+<main class="deals-container">
+    <div class="deals-filter-bar">
+        <div class="deal-pills">
+            <span class="deal-pill active">All Deals</span>
+            <span class="deal-pill">BOGO</span>
+            <span class="deal-pill">20% Off +</span>
+            <span class="deal-pill">Ending Soon</span>
+        </div>
+    </div>
+
+    <section class="deals-grid" id="deals-grid">
+        <div class="deal-card">
+            <div class="deal-badge">20% OFF</div>
+            <div class="deal-image">
+                <img src="https://via.placeholder.com/400x200/9B2E2E/FFFFFF?text=The+Golden+Cup" alt="Cafe">
+            </div>
+            <div class="deal-info">
+                <h3>The Golden Cup</h3>
+                <p class="deal-desc">Get 20% off any breakfast pastry with a large latte.</p>
+                <div class="deal-meta">
+                    <span class="expiry"><i class="far fa-clock"></i> Expires in 2 days</span>
+                </div>
+                <button class="btn-primary claim-btn" onclick="claimDeal('GOLDEN20')">Claim Voucher</button>
+            </div>
+        </div>
+
+        </section>
+</main>
+
+<div id="deal-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Your Discount Code</h2>
+        <p>Show this code at the register to redeem your deal!</p>
+        <div class="voucher-display" id="voucher-code">CODE123</div>
+        <button class="btn-primary copy-btn" onclick="copyCode()">Copy Code</button>
+    </div>
+</div>
+
+<script src="deals.js"></script>
+</body>
+</html>

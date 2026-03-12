@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Community Magnet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="auth-status.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="login.js"></script> 
+</head>
+
+<body class="auth-body">
+
+       <nav class="navbar">
+    <div class="nav-container">
+        <div class="logo" onclick="window.location.href='index.html'">
+            <i class="fas fa-magnet" style="color: #FF5A1F; transform: rotate(-45deg); margin-right: 5px;"></i>
+            Community<span style="font-weight: 300; color: #6D3D3D;">Magnet</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Discover</a></li>
+            
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Categories <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i></a>
+                <div class="dropdown-content">
+                    <div class="dropdown-grid">
+                        <div class="dropdown-column">
+                            <h4>Restaurants</h4>
+                            <a href="#">Cafes & Bakeries</a>
+                            <a href="#">Fine Dining</a>
+                            <a href="#">Fast Food</a>
+                            <a href="#">Street Food</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Retail</h4>
+                            <a href="#">Thrift & Vintage</a>
+                            <a href="#">Boutiques</a>
+                            <a href="#">Home Decor</a>
+                            <a href="#">Bookstores</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Services</h4>
+                            <a href="#">Auto Repair</a>
+                            <a href="#">Hair & Beauty</a>
+                            <a href="#">Pet Care</a>
+                            <a href="#">Health & Fitness</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="submit.html">Submit a Spot</a></li>
+            <li><a href="login.html" id="auth-nav-link" class="login-btn">Log in</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <main class="auth-container">
+        <div class="auth-card">
+            <div class="auth-toggle">
+                <button id="login-tab" class="active" onclick="toggleAuth('login')">Login</button>
+                <button id="signup-tab" onclick="toggleAuth('signup')">New Account</button>
+            </div>
+
+            <form id="login-form" class="auth-form">
+                <h2>Welcome Back</h2>
+                <p>Log in to save your favorite community spots.</p>
+                
+                <input type="text" id="user_middle_name" style="display:none" tabindex="-1" autocomplete="off">
+
+                <div class="social-login">
+                    <button type="button" class="btn-social google"><i class="fab fa-google"></i> Google</button>
+                    <button type="button" class="btn-social facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+                </div>
+
+                <div class="divider"><span>or use email</span></div>
+
+                <div class="field">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Password" required>
+                </div>
+
+                <button type="submit" class="btn-primary auth-submit">Sign In</button>
+                <a href="#" class="forgot-pass">Forgot Password?</a>
+            </form>
+
+            <form id="signup-form" class="auth-form hidden">
+                <h2>Join the Magnet</h2>
+                <p>Start tracking your local impact today.</p>
+                
+                <input type="text" id="user_alt_email" style="display:none" tabindex="-1" autocomplete="off">
+
+                <div class="field">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="field">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="field">
+                    <input type="password" placeholder="Create Password" required>
+                </div>
+
+                <button type="submit" class="btn-primary auth-submit">Create Account</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcrkoYsAAAAAN0XcygeveqwHZqE8Yl2xTo0uqD5"></script>
+</body>
+</html>

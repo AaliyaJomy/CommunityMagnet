@@ -1,120 +1,125 @@
 /**
  * COMMUNITY MAGNET - Core Logic
- * Handles: Data Rendering, Filtering, Search, and Page Navigation
  */
 
-// 1. DUMMY DATA (This would eventually come from a Database API)
-const businessData = [
-    {
-        id: 1,
-        name: "Sakura Sushi Haven",
-        category: "Food",
-        rating: 4.8,
-        price: "$$$",
-        location: "Central District",
-        image: "https://via.placeholder.com/300x200/9B2E2E/FFFFFF?text=Sushi+Haven",
-        verified: true,
-        deal: "15% Off First Visit"
-    },
-    {
-        id: 2,
-        name: "Vintage Threads",
-        category: "Retail",
-        rating: 4.5,
-        price: "$$",
-        location: "West End",
-        image: "https://via.placeholder.com/300x200/FF5A1F/FFFFFF?text=Vintage+Threads",
-        verified: true,
-        deal: null
-    },
-    {
-        id: 3,
-        name: "Ramen Revelations",
-        category: "Food",
-        rating: 4.7,
-        price: "$$",
-        location: "North Heights",
-        image: "https://via.placeholder.com/300x200/F9A11B/FFFFFF?text=Ramen+Shop",
-        verified: false,
-        deal: "BOGO Ramen Mondays"
-    }
-];
-
-// 2. INITIALIZE PAGE
+// 2. INITIALIZE
 document.addEventListener('DOMContentLoaded', () => {
     renderBusinessCards(businessData);
     setupFilters();
 });
 
-// 3. RENDER CARDS TO GRID
+// 3. RENDER CARDS
 function renderBusinessCards(data) {
     const grid = document.getElementById('business-grid');
-    if (!grid) return; // Exit if not on the discovery page
+    if (!grid) return;
 
-    grid.innerHTML = ''; // Clear existing cards
+    grid.innerHTML = ''; 
+    const favorites = JSON.parse(localStorage.getItem('communityFavorites')) || [];
+
+    const typeEmojis = {
+        "Cafes & Bakeries": "☕",
+        "Fine Dining": "🍽️",
+        "Fast Food": "🍕",
+        "Thrift & Vintage": "👕",
+        "Boutiques": "✨",
+        "Bookstores": "📖",
+        "Auto Repair": "🚗",
+        "Hair & Beauty": "💅",
+        "Health & Fitness": "💪"
+    };
+
+    if (data.length === 0) {
+        grid.innerHTML = '<p class="no-results">No businesses match your filters.</p>';
+        return;
+    }
 
     data.forEach(biz => {
+        const isFavorited = favorites.includes(biz.id);
+        const heartClass = isFavorited ? 'fas' : 'far';
+        const emoji = typeEmojis[biz.type] || "📍";
+
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
             <div class="card-img-wrapper">
-                <img src="${biz.image}" alt="${biz.name}">
-                ${biz.verified ? '<span class="card-verified-badge">Verified</span>' : ''}
-                <button class="card-bookmark-btn"><i class="far fa-heart"></i></button>
+                ${emoji}
+                ${biz.deal ? `<span class="deal-tag">Deal Available</span>` : ''}
+                <button class="card-bookmark-btn" onclick="toggleFavorite('${biz.id}')">
+                    <i class="${heartClass} fa-heart"></i>
+                </button>
             </div>
             <div class="card-content">
                 <div class="card-rating">
                     <i class="fas fa-star"></i> <span>${biz.rating}/5</span>
                 </div>
                 <h3 class="card-title">${biz.name}</h3>
-                <p class="card-category">${biz.category} • ${biz.location}</p>
+                <p class="card-category">${biz.type}</p>
+                <p class="card-location"><i class="fas fa-map-marker-alt"></i> ${biz.address}</p>
+                <div class="card-features">
+                    ${biz.wifi ? '<i class="fas fa-wifi" title="Free WiFi"></i> ' : ''}
+                    ${biz.petFriendly ? '<i class="fas fa-dog" title="Pet Friendly"></i> ' : ''}
+                    ${biz.accessible ? '<i class="fas fa-wheelchair" title="Accessible"></i>' : ''}
+                </div>
                 <div class="card-price-deal">
-                    <span class="price-start">Starting at ${biz.price}</span>
-                    ${biz.deal ? `<span class="deal-tag">${biz.deal}</span>` : ''}
+                    <span class="price-start">Price: <strong>${biz.price}</strong></span>
                 </div>
             </div>
             <div class="card-action">
-                <button class="btn-card-visit" onclick="viewBusiness(${biz.id})">View Details</button>
+                <button class="btn-card-visit" onclick="viewBusiness('${biz.id}')">View Details</button>
             </div>
         `;
         grid.appendChild(card);
     });
 }
 
-// 4. FILTERING LOGIC
+// 4. FILTERING
 function setupFilters() {
     const checkboxes = document.querySelectorAll('.sidebar-filters input[type="checkbox"]');
     
     checkboxes.forEach(box => {
         box.addEventListener('change', () => {
-            const activeCategories = Array.from(checkboxes)
-                .filter(i => i.checked)
-                .map(i => i.id.replace('cat-', '').toLowerCase());
+            let filtered = businessData;
 
-            if (activeCategories.length === 0) {
-                renderBusinessCards(businessData); // Show all if none selected
-            } else {
-                const filtered = businessData.filter(biz => 
-                    activeCategories.includes(biz.category.toLowerCase())
-                );
-                renderBusinessCards(filtered);
+            // Favorites
+            const favCheckbox = document.getElementById('feat-verified');
+            if (favCheckbox && favCheckbox.checked) {
+                const favorites = JSON.parse(localStorage.getItem('communityFavorites')) || [];
+                filtered = filtered.filter(biz => favorites.includes(biz.id));
             }
+
+            // Categories
+            const activeSubtypeCheckboxes = Array.from(document.querySelectorAll('.scroll-filter-box input:checked'));
+            const activeSubtypes = activeSubtypeCheckboxes.map(cb => cb.nextElementSibling.innerText.trim());
+
+            if (activeSubtypes.length > 0) {
+                filtered = filtered.filter(biz => activeSubtypes.includes(biz.type));
+            }
+
+            // Features
+            if (document.getElementById('acc-wifi').checked) filtered = filtered.filter(biz => biz.wifi);
+            if (document.getElementById('acc-pet').checked) filtered = filtered.filter(biz => biz.petFriendly);
+            if (document.getElementById('acc-wheel').checked) filtered = filtered.filter(biz => biz.accessible);
+
+            renderBusinessCards(filtered);
         });
     });
 }
 
-// 5. NAVIGATION HELPER
-function viewBusiness(id) {
-    window.location.href = `business.html?id=${id}`;
-}
-
-// 6. INPUT VALIDATION (Anti-Bot Check)
-function validateReview(input) {
-    const pattern = /^[a-zA-Z0-9\s,.!?]*$/;
-    if (!pattern.test(input)) {
-        console.error("Invalid characters detected.");
-        return false;
+// 5. FAVORITES
+function toggleFavorite(id) {
+    let favorites = JSON.parse(localStorage.getItem('communityFavorites')) || [];
+    if (favorites.includes(id)) {
+        favorites = favorites.filter(favId => favId !== id);
+    } else {
+        favorites.push(id);
     }
-    return true;
+    localStorage.setItem('communityFavorites', JSON.stringify(favorites));
+    
+    // Trigger the change event on a checkbox to refresh current view with existing filters
+    document.querySelector('.sidebar-filters input').dispatchEvent(new Event('change'));
 }
 
+// 6. NAVIGATION
+function viewBusiness(id) {
+    window.location.href = `details.html?id=${id}`;
+}

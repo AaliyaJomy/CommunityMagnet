@@ -1,66 +1,41 @@
-const businessData = [
-    { 
-        id: 1, 
-        name: "Sakura Sushi Haven", 
-        type: "restaurant", 
-        location: "Central District", 
-        image: "https://via.placeholder.com/1200x600/9B2E2E/FFFFFF?text=Sushi+Bar",
-        details: { menu: ["Spicy Tuna Roll", "Miso Soup", "Dragon Roll"], highlight: "Chef's Special" }
-    },
-    { 
-        id: 2, 
-        name: "Vintage Threads", 
-        type: "retail", 
-        location: "West End", 
-        image: "https://via.placeholder.com/1200x600/FF5A1F/FFFFFF?text=Thrift+Store",
-        details: { sections: ["Menswear", "Accessories", "90s Retro"], highlight: "New Arrivals Daily" }
-    },
-    { 
-        id: 3, 
-        name: "Quick Fix Auto", 
-        type: "service", 
-        location: "North Heights", 
-        image: "https://via.placeholder.com/1200x600/6D3D3D/FFFFFF?text=Mechanic+Shop",
-        details: { services: ["Oil Change", "Tire Rotation", "Brake Check"], highlight: "Same Day Service" }
-    }
-];
-
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
-    const bizId = parseInt(params.get('id'));
-    const biz = businessData.find(b => b.id === bizId);
+    const bizId = params.get('id');
+    const biz = businessData.find(b => b.id === (bizId || "blue-01")); 
 
     if (biz) {
+        // Core Info
         document.getElementById('biz-name').innerText = biz.name;
-        document.getElementById('biz-cat').innerText = biz.type.toUpperCase();
-        document.getElementById('biz-loc').innerText = biz.location;
-        document.getElementById('hero-bg').style.backgroundImage = `url('${biz.image}')`;
+        document.getElementById('biz-cat').innerText = biz.type;
+        document.getElementById('biz-address').innerText = biz.address;
+        document.getElementById('biz-phone').innerText = biz.phone || "Contact via Website";
+        document.getElementById('biz-hours').innerText = biz.hours || "Inquire for hours";
+        document.getElementById('biz-price').innerText = biz.price;
         
-        const infoSection = document.getElementById('dynamic-info-section');
-        
-        // --- CONDITIONAL TEMPLATE LOGIC ---
-        if (biz.type === "restaurant") {
-            infoSection.innerHTML = `
-                <div class="tab-container"><button class="tab-btn active">Menu</button></div>
-                <div class="list-container">
-                    ${biz.details.menu.map(item => `<div class="list-item"><span>${item}</span><i class="fas fa-plus"></i></div>`).join('')}
-                </div>
-            `;
-        } else if (biz.type === "retail") {
-            infoSection.innerHTML = `
-                <div class="tab-container"><button class="tab-btn active">Inventory</button></div>
-                <div class="inventory-grid">
-                    ${biz.details.sections.map(sec => `<div class="pill">${sec}</div>`).join('')}
-                </div>
-                <p class="promo-box"><strong>Note:</strong> ${biz.details.highlight}</p>
-            `;
-        } else if (biz.type === "service") {
-            infoSection.innerHTML = `
-                <div class="tab-container"><button class="tab-btn active">Service List</button></div>
-                <div class="list-container">
-                    ${biz.details.services.map(ser => `<div class="list-item"><span>${ser}</span><button class="btn-small">Book</button></div>`).join('')}
-                </div>
-            `;
+        // Amenities Logic (Mapped from true/false fields)
+        const amenities = [];
+        if (biz.wifi) amenities.push("Free Wi-Fi");
+        if (biz.accessible) amenities.push("ADA Accessible");
+        if (biz.petFriendly) amenities.push("Pet Friendly");
+        document.getElementById('biz-service-type').innerText = amenities.length > 0 ? amenities.join(", ") : "Standard Service";
+
+        // Background Image
+        document.getElementById('hero-bg').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${biz.image}')`;
+
+        // Deals Logic
+        const dealLink = document.getElementById('biz-link');
+        if (biz.deal) {
+            dealLink.innerText = `CLAIM DEAL: ${biz.deal} (Use Code: ${biz.code || 'None'})`;
+            dealLink.style.background = "var(--primary)";
+        } else {
+            dealLink.href = `https://www.google.com/search?q=${encodeURIComponent(biz.name)}`;
+            dealLink.innerText = "Search on Google";
         }
     }
 });
+
+// Existing functions
+function submitReview() {
+    alert("Thank you! Your review has been submitted for verification.");
+    document.getElementById('review-text').value = "";
+}
