@@ -12,6 +12,24 @@
     <script src="auth-status.js" defer></script>
     <script type="module" src="auth.js"></script>
 </head>
+
+<div id="chat-bubble" onclick="toggleChat()">
+    <i class="fas fa-comment-dots"></i>
+</div>
+
+<div id="chat-window" class="chat-hidden">
+    <div class="chat-header">
+        <span><i class="fas fa-magnet"></i> Magnet Assistant</span>
+        <button onclick="toggleChat()">&times;</button>
+    </div>
+    <div id="chat-body">
+        <div class="bot-msg">Hi! I'm your local guide. Ask me about "coffee", "books", or "deals" in St. Louis!</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="handleChatKey(event)">
+        <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
 <body>
 
 <nav class="navbar">
@@ -61,7 +79,7 @@
 
     <header class="carousel-section">
         <div class="carousel-item active">
-            <img src="https://via.placeholder.com/1600x400/9B2E2E/FFFFFF?text=Support+Local" alt="Support Local">
+            <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&q=80&w=1600&h=400" alt="Support Local">
             <div class="carousel-caption">
                 <h1>Support Your Community, One Visit at a Time</h1>
                 <p>Discover independent businesses, cafes, and hidden gems near you.</p>
@@ -69,18 +87,22 @@
         </div>
         </header>
 
-    <section class="map-section">
-        <div class="map-container">
-            <div class="search-bar-inline">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Search for local businesses, cafes, or services near you...">
-                <button class="btn-search">Find Now</button>
-            </div>
-            <div id="api-map" class="api-map-placeholder">
-                <img src="https://via.placeholder.com/1600x300/F0F0F0/6D3D3D?text=API+Integrated+Map+Visualization" alt="Map View">
-            </div>
+<section class="map-section">
+    <div class="map-container">
+        <div class="search-bar-inline">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search for local businesses in St. Louis...">
+            <button class="btn-search">Find Now</button>
         </div>
-    </section>
+        
+        <div id="api-map" class="map-visual-wrapper">
+            <img src="images/map.png" alt="St. Louis Community Map" class="local-map-img">
+            
+            <div class="map-pin" style="top: 40%; left: 45%;"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="map-pin" style="top: 60%; left: 55%;"><i class="fas fa-map-marker-alt"></i></div>
+        </div>
+    </div>
+</section>
 
     <main class="discovery-layout">
         <div class="main-container">
